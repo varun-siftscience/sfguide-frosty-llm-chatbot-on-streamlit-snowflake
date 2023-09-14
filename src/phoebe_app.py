@@ -1,7 +1,7 @@
 import openai
 import re
 import streamlit as st
-from prompts import get_system_prompt
+from phoebe_prompts import get_system_prompt
 
 st.title("Phoebe")
 
