@@ -72,11 +72,11 @@ Here are the columns of the {'.'.join(table)}
         metadata = conn.query(metadata_query)
         metadata = "\n".join(
             [
-                f"- **{metadata['VARIABLE_NAME'][i]}**: {metadata['DEFINITION'][i]}"
-                for i in range(len(metadata["VARIABLE_NAME"]))
+                f"- **{metadata['CUSTOMER_ID'][i]}**: {metadata['EVENT_TYPE'][i]}"
+                for i in range(len(metadata["EVENT_TYPE"]))
             ]
         )
-        context = context + f"\n\nAvailable variables by VARIABLE_NAME:\n\n{metadata}"
+        context = context + f"\n\nAvailable variables by EVENT_TYPE:\n\n{metadata}"
     return context
 
 def get_system_prompt():
