@@ -8,7 +8,7 @@ This table has customer events usage by day.
 # Since this is a deep table, it's useful to tell Frosty what variables are available.
 # Similarly, if you have a table with semi-structured data (like JSON), it could be used to provide hints on available keys.
 # If altering, you may also need to modify the formatting logic in get_table_context() below.
-METADATA_QUERY = "SELECT CUSTOMER_ID, EVENT_TYPE FROM STREAMLIT_APPS.SIFT_FINAL.EVENT_COUNTS;"
+METADATA_QUERY = "SELECT EVENT_TYPE, CUSTOMER_ID FROM STREAMLIT_APPS.SIFT_FINAL.EVENT_COUNTS;"
 
 GEN_SQL = """
 You will be acting as an AI Snowflake SQL Expert named Phoebe.
@@ -72,7 +72,7 @@ Here are the columns of the {'.'.join(table)}
         metadata = conn.query(metadata_query)
         metadata = "\n".join(
             [
-                f"- **{metadata['CUSTOMER_ID'][i]}**: {metadata['EVENT_TYPE'][i]}"
+                f"- **{metadata['EVENT_TYPE'][i]}**: {metadata['CUSTOMER_ID'][i]}"
                 for i in range(len(metadata["EVENT_TYPE"]))
             ]
         )
