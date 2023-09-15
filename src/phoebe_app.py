@@ -1,9 +1,11 @@
 import re
-import matplotlib.pyplot as plt
+
 import openai
-import seaborn as sns
 import streamlit as st
+
 from phoebe_prompts import get_system_prompt
+from plots import plot, NO_PLOT, BAR_TYPE, SCATTER_TYPE, LINE_TYPE, PIE_TYPE
+
 
 st.title("Phoebe")
 
@@ -26,9 +28,13 @@ for message in st.session_state.messages:
         st.write(message["content"])
         if "results" in message:
             st.dataframe(message["results"])
+        # if "plots" in message:
+        #     for plot in message["plots"]:
+        #         plot_type = plot["type"]
+        #         plot(message["results"], plot_type)
 
 # Sidebar for plot type selection
-plot_options = ["Bar plot", "Scatter plot", "Line plot", "No plot"]
+plot_options = [NO_PLOT, BAR_TYPE, SCATTER_TYPE, LINE_TYPE, PIE_TYPE]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
 st.sidebar.text_input('Plot type:', selected_plot)
 
@@ -60,41 +66,11 @@ if st.session_state.messages[-1]["role"] != "assistant":
             st.dataframe(message["results"])
 
             # try plotting
-            if selected_plot == "Bar plot":
-                # x_axis = st.sidebar.selectbox("Select x-axis", data.columns)
-                # st.sidebar.text_input('X axis:', x_axis)
-                # y_axis = st.sidebar.selectbox("Select y-axis", data.columns)
-                # st.sidebar.text_input('Y axis:', y_axis)
-
-                x_axis, y_axis = data.columns[0], data.columns[1]
-                st.write("Bar plot:")
-                fig, ax = plt.subplots()
-                sns.barplot(x=data[x_axis], y=data[y_axis], ax=ax)
-                st.pyplot(fig)
-
-            elif selected_plot == "Scatter plot":
-                # x_axis = st.sidebar.selectbox("Select x-axis", data.columns)
-                # st.sidebar.text_input('X axis:', x_axis)
-                # y_axis = st.sidebar.selectbox("Select y-axis", data.columns)
-                # st.sidebar.text_input('Y axis:', y_axis)
-
-                x_axis, y_axis = data.columns[0], data.columns[1]
-                st.write("Scatter plot:")
-                fig, ax = plt.subplots()
-                sns.scatterplot(x=data[x_axis], y=data[y_axis], ax=ax)
-                st.pyplot(fig)
-
-            elif selected_plot == "Line plot":
-                # x_axis = st.sidebar.selectbox("Select x-axis", data.columns)
-                # st.sidebar.text_input('X axis:', x_axis)
-                # y_axis = st.sidebar.selectbox("Select y-axis", data.columns)
-                # st.sidebar.text_input('Y axis:', y_axis)
-
-                x_axis, y_axis = data.columns[0], data.columns[1]
-                st.write("Line plot:")
-                st.line_chart(data, x=x_axis, y=y_axis)
-
-            elif selected_plot == "No plot":
-                pass
+            if selected_plot != NO_PLOT:
+                plot_obj = plot(data, selected_plot)
+                if "plots" not in message:
+                    message["plots"] = [plot_obj]
+                else:
+                    message["plots"].append(plot_obj)
 
         st.session_state.messages.append(message)
