@@ -1,4 +1,4 @@
-matplotib==3.7.0
+matplotib==3.7.3
 openai==0.27.8
 seaborn==0.12.0
 snowflake-snowpark-python[pandas]==1.5.1
