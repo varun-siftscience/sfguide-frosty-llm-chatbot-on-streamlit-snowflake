@@ -34,6 +34,7 @@ for message in st.session_state.messages:
         #         plot(message["results"], plot_type)
 
 # Sidebar for plot type selection
+st.sidebar.image("./assets/Sift_Logo_Color_RGB.jpg", use_column_width=True)
 plot_options = [NO_PLOT, BAR_TYPE, SCATTER_TYPE, LINE_TYPE, PIE_TYPE]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
 st.sidebar.text_input('Plot type:', selected_plot)
