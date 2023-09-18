@@ -6,7 +6,7 @@ import streamlit as st
 from phoebe_prompts import get_system_prompt
 from plots import plot, NO_PLOT, BAR_TYPE, SCATTER_TYPE, LINE_TYPE, PIE_TYPE
 
-st.header(':blue[Snowflake Chatbot]', divider='rainbow')
+st.header(':blue[Sift Chatbot]', divider='rainbow')
 
 # Initialize the chat messages history
 openai.api_key = st.secrets.OPENAI_API_KEY
