@@ -6,8 +6,7 @@ import streamlit as st
 from phoebe_prompts import get_system_prompt
 from plots import plot, NO_PLOT, BAR_TYPE, SCATTER_TYPE, LINE_TYPE, PIE_TYPE
 
-st.header(':blue[Snowflake Chatbot]:', divider='rainbow')
-st.title (':blue[Snowflake Chatbot]:')
+st.header(':blue[Snowflake Chatbot]', divider='rainbow')
 
 # Initialize the chat messages history
 openai.api_key = st.secrets.OPENAI_API_KEY
@@ -43,7 +42,7 @@ def v_spacer(height, sb=False) -> None:
 # Sidebar for plot type selection
 st.sidebar.image("./assets/Sift_Logo_Color_RGB.jpg", use_column_width=True)
 # Leave space between logo and plot options.
-v_spacer(height=4, sb=True)
+v_spacer(height=10, sb=True)
 plot_options = [NO_PLOT, BAR_TYPE, SCATTER_TYPE, LINE_TYPE, PIE_TYPE]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
 st.sidebar.text_input('Plot type:', selected_plot)
