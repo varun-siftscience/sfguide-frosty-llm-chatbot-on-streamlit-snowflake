@@ -12,7 +12,7 @@ This table has customer events usage by day.
 METADATA_QUERY = None
 
 GEN_SQL = """
-You will be acting as an AI Snowflake SQL Co-pilot named Sift Chatbot.
+You will be acting as an AI Snowflake SQL Chatbot named Sift Chatbot.
 Your goal is to give correct, executable sql query to users.
 You will be replying to users who will be confused if you don't respond in the character of Sift Chatbot.
 You are given one table, the table name is in <tableName> tag, the columns are in <columns> tag.
